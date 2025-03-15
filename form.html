@@ -55,9 +55,25 @@
               Bringing Energy To Life...
             </h5>
           </div>
-          <!-- <div class="row center">
-          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
-        </div> -->
+          <div class="row center">
+            <div class="col s6">
+              <a
+              href="./"
+              id="download-button"
+              class="btn-large waves-effect waves-light white red-text right-align lighten-1"
+              >Back to Available jobs</a
+            >
+            </div>
+            <div class="col s6">
+              <a
+              href="http://ikejaelectric.com/"
+              id="download-button"
+              class="btn-large waves-effect waves-light orange lighten-1"
+              >Back to home page</a
+            >
+            </div>
+          </div>
+
           <br /><br />
         </div>
       </div>
@@ -113,7 +129,9 @@
                             class="validate"
                             required
                           />
-                          <label for="firstName" class="orange-text">First Name*</label>
+                          <label for="firstName" class="orange-text"
+                            >First Name*</label
+                          >
                         </div>
 
                         <!-- Middle Name -->
@@ -124,7 +142,9 @@
                             type="text"
                             class="validate"
                           />
-                          <label for="middleName" class="orange-text">Middle Name</label>
+                          <label for="middleName" class="orange-text"
+                            >Middle Name</label
+                          >
                         </div>
 
                         <!-- Last Name -->
@@ -136,7 +156,9 @@
                             class="validate"
                             required
                           />
-                          <label for="lastName" class="orange-text">Last Name*</label>
+                          <label for="lastName" class="orange-text"
+                            >Last Name*</label
+                          >
                         </div>
                       </div>
 
@@ -150,7 +172,9 @@
                             class="validate"
                             required
                           />
-                          <label for="email" class="orange-text">Email Address*</label>
+                          <label for="email" class="orange-text"
+                            >Email Address*</label
+                          >
                         </div>
 
                         <!-- Phone Number -->
@@ -162,7 +186,9 @@
                             class="validate"
                             required
                           />
-                          <label for="phoneNumber" class="orange-text">Phone Number*</label>
+                          <label for="phoneNumber" class="orange-text"
+                            >Phone Number*</label
+                          >
                         </div>
                       </div>
 
@@ -242,14 +268,28 @@
                           <input
                             id="expectedSalaryRange"
                             name="expectedSalaryRange"
-                            type="number"
+                            type="text"
                             step="0.01"
                             min="0"
                             class="validate"
+                            oninput="(function(el){
+                              let value = el.value.replace(/[^\d]/g, '');
+                              if (!value) { el.value = ''; return; }
+                              const numValue = parseInt(value, 10);
+                              el.value = numValue.toLocaleString('en-US');
+                              el.dataset.rawValue = value;
+                            })(this)"
+                            onblur="(function(el){
+                              if (el.value) { el.value = '$' + el.value; }
+                            })(this)"
+                            onfocus="(function(el){
+                              if (el.value.startsWith('$')) { el.value = el.value.substring(1); }
+                            })(this)"
                             required
                           />
                           <label for="expectedSalaryRange" class="orange-text"
-                            >Expected Salary Range (₦)*</label
+                            >Expected Salary Range
+                            <b class="black-text">(₦)</b> *</label
                           >
                         </div>
 
@@ -266,7 +306,9 @@
                             <option value="YES">Yes</option>
                             <option value="NO">No</option>
                           </select>
-                          <label class="orange-text">Available to work in Lagos?*</label>
+                          <label class="orange-text"
+                            >Available to work in Lagos?*</label
+                          >
                         </div>
                       </div>
 
@@ -279,7 +321,9 @@
                             type="url"
                             class="validate"
                           />
-                          <label for="portfolioURL" class="orange-text">Portfolio URL</label>
+                          <label for="portfolioURL" class="orange-text"
+                            >Portfolio URL</label
+                          >
                         </div>
                       </div>
 
@@ -347,11 +391,11 @@
                             <option value="google">Google</option>
                             <option value="other">Other</option>
                           </select>
-                          <label class="orange-text">Where did you hear about us?*</label>
+                          <label class="orange-text"
+                            >Where did you hear about us?*</label
+                          >
                         </div>
                       </div>
-
-                      
 
                       <div class="row">
                         <!-- CV Upload -->
@@ -529,7 +573,8 @@
                 document.getElementById("noticePeriodInWeeks").value
               ),
               appLinkSource: document.getElementById("appLinkSource").value,
-              vacancyCode: localStorage.getItem('selectedVacancyCode'),
+              // vacancyCode: 'ITAS-001',
+              vacancyCode: localStorage.getItem("selectedVacancyCode"),
               cv: document.getElementById("cv").value, // This is already in base64
               fileName: document.getElementById("fileName").value,
               contentType: document.getElementById("contentType").value,
@@ -566,6 +611,7 @@
                   displayLength: 5000,
                 });
                 document.getElementById("applicationForm").reset();
+                localStorage.setItem("selectedVacancyCode", "");
 
                 // Reset the file input
                 document.getElementById("cv").value = "";

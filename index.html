@@ -59,6 +59,16 @@
               Bringing Energy To Life...
             </h5>
           </div>
+
+          <div class="row center">
+            <a
+              href="http://ikejaelectric.com/"
+              id="download-button"
+              class="btn-large waves-effect waves-light orange lighten-1"
+              >Back to home page</a
+            >
+          </div>
+          
           <br /><br />
         </div>
       </div>
@@ -312,7 +322,7 @@
 
         // Save ID to localStorage
         function saveIdToLocalStorage(id) {
-          localStorage.setItem("selectedVacancyId", id);
+          // localStorage.setItem("selectedVacancyId", id);
           M.toast({
             html: `Vacancy ID ${id} saved to localStorage`,
             classes: "toast-custom",
@@ -324,8 +334,8 @@
         function saveVacancyCodeToLocalStorage(code) {
           localStorage.setItem("selectedVacancyCode", code);
           M.toast({
-            html: `Vacancy Code ${code} saved to localStorage`,
-            classes: "toast-custom",
+            html: `Please wait`,
+            classes: "toast-custom orange",
             displayLength: 2000,
           });
         }
